@@ -1,0 +1,6 @@
+# _target_: tasks.tasks.MultiClassWeighted
+_name_: multiclassweighted
+loss: weighted_cross_entropy
+metrics:
+  - accuracy
+torchmetrics: null

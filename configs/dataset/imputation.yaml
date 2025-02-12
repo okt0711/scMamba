@@ -1,0 +1,28 @@
+_name_: imputation
+dataset_name: imputation
+study_dir: '/your/data/directory'
+mem_probability: 0.4
+umi_filter: True
+add_eos: False
+batch_size: 8
+batch_size_eval: ${eval:${.batch_size} * 2}
+num_workers: 4
+shuffle: True
+pin_memory: True
+
+# Lau
+studies: ['Lau_2020_PNAS']
+__train_len: 35_656
+# Leng
+# studies: ['Leng_2021_Nat_Neurosci']
+# __train_len: 10_885
+# Smajic
+# studies: ['Smajic_2022_brain',]
+# __train_len: 19_766
+# Zhu
+# studies: ['Zhu_2022_bioRxiv']
+# __train_len: 33_548
+# Jung
+# studies: ['Jung_2022_unpublished']
+# __train_len: 
+# __train_len: 182_364

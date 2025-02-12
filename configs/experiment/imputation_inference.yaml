@@ -1,0 +1,31 @@
+model:
+  d_model: 256
+  n_layer: 6
+  vocab_size: 20_311
+  rms_norm: True
+  residual_in_fp32: True
+  fused_add_norm: True
+  pad_vocab_size_multiple: 8
+  is_cls: False
+  is_mask: True
+  ssm_cfg:
+    bimamba_type: v2
+
+dataset:
+  studies: ['Lau_2020_PNAS']
+  # studies: ['Leng_2021_Nat_Neurosci']
+  # studies: ['Smajic_2022_brain']
+  # studies: ['Zhu_2022_bioRxiv']
+  # studies: ['Jung_2022_unpublished']
+  study_dir: '/your/data/directory'
+  split: 'test'
+  add_eos: False
+  mrm_probability: 0.4
+
+ckpt_path: '/checkpoint/directory'
+vocab_path: '/vocabulary/directory'
+output_path: '/output/directory'
+h5ad_path: '/h5ad/file/directory'
+batch_size: 32
+num_workers: 4
+pin_memory: True

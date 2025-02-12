@@ -1,0 +1,20 @@
+# @package _global_
+defaults:
+  - /trainer: default
+  - /loader: default
+  - /dataset: imputation
+  - /optimizer: adamw
+  - /scheduler: plateau
+  - /callbacks: [base, checkpoint]
+
+train:
+  monitor: val/loss
+  mode: min
+
+task:
+  _name_: base
+  loss: mse
+  torchmetrics: null
+
+encoder: null
+decoder: null

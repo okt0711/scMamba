@@ -1,0 +1,25 @@
+_name_: subtype
+dataset_name: subtype
+study_dir: '/your/data/directory'
+add_eos: False
+batch_size: 16
+batch_size_eval: ${eval:${.batch_size} * 2}
+num_workers: 4
+shuffle: True
+pin_memory: True
+
+# Lau
+studies: ['Lau_2020_PNAS']
+__train_len: 86_665
+# Leng
+# studies: ['Leng_2021_Nat_Neurosci']
+# __train_len: 36_796
+# Smajic
+# studies: ['Smajic_2022_brain',]
+# __train_len: 25_541
+# Zhu
+# studies: ['Zhu_2022_bioRxiv']
+# __train_len: 49_456
+# Jung
+# studies: ['Jung_2022_unpublished']
+# __train_len: 289_376

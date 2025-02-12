@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - /trainer: default
+  - /loader: default
+  - /dataset: subtype
+  - /task: multiclass_classification
+  - /optimizer: adamw
+  - /scheduler: plateau
+  - /callbacks: [base, checkpoint]
+
+train:
+  monitor: val/accuracy
+  mode: max
+
+encoder: null
+decoder: null

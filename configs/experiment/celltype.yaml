@@ -1,0 +1,62 @@
+# @package _global_
+defaults:
+  - /pipeline: celltype
+  - override /scheduler: cosine_warmup_timm
+
+model:
+  _name_: mamba_cls
+  d_model: 256
+  n_layer: 6
+  vocab_size: 20_311
+  rms_norm: True
+  residual_in_fp32: True
+  fused_add_norm: True
+  pad_vocab_size_multiple: 8
+  is_cls: True
+  is_mask: False
+  num_class: 8
+  ssm_cfg:
+    bimamba_type: v2
+
+task:
+  metrics:
+    - accuracy
+    - accuracy_per_class
+    - precision_per_class
+    - recall_per_class
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  num_nodes: 1
+  accumulate_grad_batches: ${div_up:${train.global_batch_size}, ${eval:${trainer.devices} * ${dataset.batch_size} * ${trainer.num_nodes}}}
+  max_epochs: 5
+  precision: 16
+  gradient_clip_val: 1.0
+
+dataset:
+  add_cls: ${model.is_cls}
+
+scheduler:
+  t_in_epochs: False
+  t_initial: ${eval:${div_up:${dataset.__train_len}, ${eval:${trainer.devices} * ${train.global_batch_size} * ${trainer.num_nodes}}} * ${trainer.max_epochs}}
+  warmup_lr_init: 1e-6
+  warmup_t: ${eval:${div_up:${dataset.__train_len}, ${eval:${trainer.devices} * ${train.global_batch_size} * ${trainer.num_nodes}}} * ${trainer.max_epochs} * 0.01}
+  lr_min: ${eval:0.1 * ${optimizer.lr}}
+
+optimizer:
+  lr: 1e-4
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+
+train:
+  gpu_mem: ${eval:"round(float(__import__('subprocess').check_output('nvidia-smi -i 0 --query-gpu=memory.total --format=csv,noheader,nounits', shell=True).strip().decode()) / 1000)"}
+  seed: 2222
+  global_batch_size: 16  # effects the scheduler, need to set properly
+  remove_test_loader_in_eval: True
+  pretrained_model_strict_load: False
+
+  pretrained_model_path: /pretrained/model/directory
+  pretrained_model_state_hook:
+    _name_: load_backbone
+    freeze_backbone: false  # seems to work much better if false (ie finetune entire model)

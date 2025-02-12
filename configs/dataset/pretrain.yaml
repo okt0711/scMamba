@@ -1,0 +1,22 @@
+_name_: pretrain
+dataset_name: pretrain
+studies: ['Agarwal_2020_Nat_commun',
+          'Gerrits_2021_Acta_Neuropathol',
+          'Kamath_2022_Nat_Neurosci',
+          'Marcos_2022_Neuron',
+          'Morabito_2021_Nat_Genet',
+          'Sadick_2022_Neuron',
+          'Smith_2020_Acta_Neuropathol',
+          'Wang_et_al_2022_bioRxiv',
+          'Yang_2022_Nature',
+          'Zhang_et_al_2022_unpublished'
+]
+study_dir: '/your/data/directory'
+mem_probability: 0.15
+add_eos: False
+batch_size: 16
+batch_size_eval: ${eval:${.batch_size} * 2}
+num_workers: 4
+shuffle: True
+pin_memory: True
+__train_len: 1_584_936
