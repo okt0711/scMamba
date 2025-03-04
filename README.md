@@ -3,6 +3,9 @@
 This repository is the official pytorch implementation of "scMamba: A Pre-Trained Model for Single-Nucleus RNA Sequencing Analysis in Neurodegenerative Disorders".  
 The code was modified from [[this repo]](https://github.com/HazyResearch/hyena-dna), and some parts were modified from [[this repo]](https://github.com/state-spaces/mamba)
 
+> "scMamba: A Pre-Trained Model for Single-Nucleus RNA Sequencing Analysis in Neurodegenerative Disorders",  
+> Gyutaek Oh, Baekgyu Choi, Seyoung Jin, Inkyung Jung, and Jong Chul Ye,  
+> arXiv preprint [[Paper]](https://arxiv.org/abs/2502.19429)
 ## Requirements
 
 The code is implented in Python 3.8 with below packages.
